@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+        #jiu {
+            background-color:yellow;
+            padding:20px;
+        }
+        #response {
+            margin-top:20px;
+            background-color: aquamarine;
+            padding: 10px;
+        }
+     </style>
+</head>
+
+<body>
+      <div id="jiu">
+          <h1>cbc解惑</h1>
+          <input type="text" id="question" placeholder="请主人输入您的问题">
+
+          <button id="submit">提交</button>
+          <div id='response'></div>
+      </div>
+      <script>
+          document.getElementById('submit').addEventListener('click',async ()=>{
+        const question = document.getElementById('question').value;
+            const response = await fetch('http://127.0.0.1:5000/query',{
+            method:'POST',
+            headers:{'Content-type':'application/json'},
+            body:JSON.stringify({ask:question})
+            });
+            const data =await response.json();
+            document.getElementById('response').textContent=data.answer;
+
+         });
+      </script>
+
+
+
+
+
+
+
+</body>
+</html>
